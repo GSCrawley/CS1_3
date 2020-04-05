@@ -9,7 +9,6 @@ import string
 # string.ascii_letters is ascii_lowercase + ascii_uppercase
 # string.printable is digits + ascii_letters + punctuation + whitespace
 
-
 def decode(digits, base):
     """Decode given digits in given base to number in base 10.
     digits: str -- string representation of number (in given base)
@@ -18,7 +17,58 @@ def decode(digits, base):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # TODO: Decode digits from binary (base 2)
-    # ...
+    # This reverses the digits
+    digits = digits[::-1]
+    # Put the digits into a list
+    digit_list = list(digits)
+    # make a new list
+    new_list = []
+    # loop through each index of the list
+    for i in range (len(digit_list)):
+        # if the content of that index is found in the alphabit
+        if i in list(string.ascii_uppercase):
+            # start a counter at 10
+            count = 10
+            # loop through each letter in the alphabit
+            for letter in string.ascii_uppercase:
+                # if the letter is equal to the content of the index
+                if i == letter:
+                    # add the quality of count to new_list
+                    new_list.append(count)
+                else:
+                    # increase count by one
+                    count += 1
+        #else, if the content of that index if found in the alphabit
+        elif i in list(string.ascii_lowercase):
+            # start a counter at 10
+            count = 10
+            # loop through each letter in the alphabit
+            for letter in string.ascii_lowercase:
+                # if the latter is equal to the content of the index
+                if i == letter:
+                    # add the quality of count to new_list
+                    new_list.append(count)
+                else:
+                    # increase count by one
+                    count += 1
+        # else, put the index into new_list
+        else:
+            new_list.append(i)
+
+    d_num = 0
+    # loop through the length of new_list
+    for i in range(len(new_list)):
+         # set number to be the index
+        number = new_list[i]
+        # convert that to an int
+        number = int(number)
+        print("number", number)
+        # d_num increased by number times the base to the power of the index
+        d_num += number * base**i
+    return d_num
+
+print(decode("23G",2))
+
     # TODO: Decode digits from hexadecimal (base 16)
     # ...
     # TODO: Decode digits from any base (2 up to 36)
@@ -35,12 +85,32 @@ def encode(number, base):
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
     # TODO: Encode number in binary (base 2)
-    # ...
+    # """"if input is 5, output wil. be 0101 """"
     # TODO: Encode number in hexadecimal (base 16)
-    # ...
+    # """"if input is 26, output will be 1A """
+    # make an empty string
+    ret_str = ""
+    #loop while the number is greater than 0
+    while number > 0:
+        # remainder from modulous
+        remainder = number % base
+        # number - remainder
+        number -= remainder
+        #divide number by base
+        number = number // base
+        #if remainder is greater than 9
+        if remainder > 9:
+            #remainder equals the content of the index in the alphabet
+            remainder = string.ascii_lowercase[remainder-10]
+        # convert to string
+        ret_str = str(remainder) + ret_str
+    return ret_str
+
+
+
     # TODO: Encode number in any base (2 up to 36)
     # ...
-
+print(encode(42,16))
 
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
