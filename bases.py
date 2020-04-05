@@ -24,7 +24,7 @@ def decode(digits, base):
     # make a new list
     new_list = []
     # loop through each index of the list
-    for i in range (len(digit_list)):
+    for i in digit_list:
         # if the content of that index is found in the alphabit
         if i in list(string.ascii_uppercase):
             # start a counter at 10
@@ -57,8 +57,8 @@ def decode(digits, base):
 
     d_num = 0
     # loop through the length of new_list
-    for i in range(len(new_lis t)):
-         # set number to be the index
+    for i in range(len(new_list)):
+        # set number to be the index
         number = new_list[i]
         # convert that to an int
         number = int(number)
@@ -67,7 +67,9 @@ def decode(digits, base):
         d_num += number * base**i
     return d_num
 
-print(decode("23G",2))
+"""uncomment this to test if decode works"""
+print(decode("23G", 36))
+
 
     # TODO: Decode digits from hexadecimal (base 16)
     # ...
