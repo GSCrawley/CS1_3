@@ -57,7 +57,7 @@ def decode(digits, base):
 
     d_num = 0
     # loop through the length of new_list
-    for i in range(len(new_list)):
+    for i in range(len(new_lis t)):
          # set number to be the index
         number = new_list[i]
         # convert that to an int
