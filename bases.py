@@ -42,7 +42,7 @@ def decode(digits, base):
         elif i in list(string.ascii_lowercase):
             # start a counter at 10
             count = 10
-            # loop through each letter in the alphabit
+            # loop through each letter in the alphabet
             for letter in string.ascii_lowercase:
                 # if the latter is equal to the content of the index
                 if i == letter:
@@ -53,12 +53,12 @@ def decode(digits, base):
                     count += 1
         # else, put the index into new_list
         else:
-            new_list.append(i)
+            new_list.append(i)                                                  
 
     d_num = 0
     # loop through the length of new_list
     for i in range(len(new_list)):
-        # set number to be the index
+         # set number to be the index
         number = new_list[i]
         # convert that to an int
         number = int(number)
@@ -67,14 +67,7 @@ def decode(digits, base):
         d_num += number * base**i
     return d_num
 
-"""uncomment this to test if decode works"""
-print(decode("23G", 36))
-
-
-    # TODO: Decode digits from hexadecimal (base 16)
-    # ...
-    # TODO: Decode digits from any base (2 up to 36)
-    # ...
+print(decode("23F",16))
 
 
 def encode(number, base):
@@ -108,10 +101,6 @@ def encode(number, base):
         ret_str = str(remainder) + ret_str
     return ret_str
 
-
-
-    # TODO: Encode number in any base (2 up to 36)
-    # ...
 print(encode(42,16))
 
 def convert(digits, base1, base2):
@@ -124,7 +113,14 @@ def convert(digits, base1, base2):
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
     # TODO: Convert digits from base 2 to base 16 (and vice versa)
-    # ...
+    '''0101 => 5 '''
+    
+    old_string = decode(digits,base1)
+    new_string = encode(int(old_string), base2)
+    return new_string
+
+print(convert('B6', 16, 2))
+
     # TODO: Convert digits from base 2 to base 10 (and vice versa)
     # ...
     # TODO: Convert digits from base 10 to base 16 (and vice versa)
