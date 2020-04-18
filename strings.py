@@ -5,7 +5,7 @@ def contains(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement contains here (iteratively and/or recursively)
-
+    return find_index(text, pattern, False) != None
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
@@ -13,15 +13,50 @@ def find_index(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_index here (iteratively and/or recursively)
+    #loop through text checking if a letter in the text is the pattern first letter
+    if pattern == "": #all strings contain the empty string pattern
+        return 0
 
+    text_index = 0
+    pattern_index = 0
+    while text_index != len(text):
+        print("Text Index",text_index)
+        print("Pattern Index", pattern_index)
+        text_letter = text[text_index]
+        pattern_letter = pattern[pattern_index] #have a match
+        if text_letter == pattern_letter:
+            print("Have a match", text_letter)
+            if pattern_index == len(pattern) -1: #end of pattern
+                return text_index -len(pattern) +1 #fix this later to first index found
+            else: #not at end yet
+                pattern_index += 1
+                text_index += 1
+        else: #not a match
+            pattern_index = 0
+            if text_letter != pattern[0]:
+                text_index += 1
+       
 
-def find_all_indexes(text, pattern):
+def find_all_indexes(text, pattern, flag = False):
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_all_indexes here (iteratively and/or recursively)
-
+    # TODOplement find_all_indexes here (iteratively and/or recursively)
+    i = 1
+    j = 1
+    l=list()
+    for i in range(len(text) - len(pattern) + 1):
+        for j in range(len(pattern)):
+            if text[i+j] != pattern[j]:
+                break
+        else:
+            if flag == True:
+                l.append(i)
+                return l
+            else:
+                l.append(i)
+    return l
 
 def test_string_algorithms(text, pattern):
     found = contains(text, pattern)
@@ -53,4 +88,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    print(find_index("ababc", "abc"))
+    print(find_all_indexes('hahahaha', 'ha'))
