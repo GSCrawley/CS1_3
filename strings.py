@@ -88,5 +88,5 @@ def main():
 
 
 if __name__ == '__main__':
-    print(find_index("ababc", "abc"))
-    print(find_all_indexes('hahahaha', 'ha'))
+    print(find_index("abc", ""))
+    print(find_all_indexes('abc',''))
