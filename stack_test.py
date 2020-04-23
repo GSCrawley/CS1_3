@@ -4,7 +4,7 @@ from stack import Stack
 import unittest
 
 
-class StackTest(unittest.TestCase):
+class stackTest(unittest.TestCase):
 
     def test_init(self):
         s = Stack()
