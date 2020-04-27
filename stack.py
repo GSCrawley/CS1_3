@@ -130,10 +130,10 @@ class ArrayStack(object):
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below
 # to use each of your Stack implementations to verify they each pass all tests
-Stack = LinkedStack
+# Stack = LinkedStack
 
-# Stack = ArrayStack
+Stack = ArrayStack
 # Stack.push(1)
 # Stack.push(4)
 # Stack.push(9)
-# print(Stack)
+print(Stack)
