@@ -231,13 +231,13 @@ class LinkedList(object):
 
 
 def test_linked_list():
-    ll = LinkedList()
+    ll = LinkedList() 
     print(ll)
 
     print('Appending items:')
     ll.append('A')
     print(ll)
-    ll.append('B')
+    ll.append('B')                  
     print(ll)
     ll.append('C')
     print(ll)
