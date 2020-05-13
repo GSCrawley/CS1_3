@@ -1,5 +1,5 @@
 #!python
-from queue import LinkedQueue
+from queue import Queue
 
 class BinaryTreeNode(object):
 
@@ -123,7 +123,7 @@ class BinarySearchTree(object):
         or None if the given item is not found. Search is performed iteratively
         starting from the root node."""
         # Best and worst case running time: O(log n)
-        node = self.root
+        node = node
         # Loop until we descend past the closest leaf node
         while node is not None:
             # Check if the given item matches the node's data
@@ -147,16 +147,13 @@ class BinarySearchTree(object):
         # Best and worst case running time: O(log n)
         # Check if starting node exists
         if node is None:
-                return None
-        elif node.data == item:
-            return node
+            return None
         # Check if the given item matches the node's data
-        elif item < node.data:
-            # Return the found node
-            return self._find_node_recursive(item, node.left)
+        elif item == node.data:
+            return node
         # Check if the given item is less than the node's data
         elif item < node.data:
-            # Recursively descend to the node's left child, if it exists
+            # Return the found node
             return self._find_node_recursive(item, node.left)
         # Check if the given item is greater than the node's data
         elif item > node.data:
@@ -191,29 +188,29 @@ class BinarySearchTree(object):
         # Not found
         return parent
 
-def _find_parent_node_recursive(self, item, node, parent=None):
-    """Return the parent node of the node containing the given item
-    (or the parent node of where the given item would be if inserted)
-    in this tree, or None if this tree is empty or has only a root node.
-    Search is performed recursively starting from the given node
-    (give the root node to start recursion)."""
-    # Best and worst case running time: O(log n)
-    # Check if starting node exists
-    if node is None:
-        # Not found (base case)
-        return parent
-    # Check if the given item matches the node's data
-    if item == node.data:
-    # Return the parent of the found node
-        return parent
-    # Check if the given item is less than the node's data
-    elif item < node.data:
-    # Recursively descend to the node's left child, if it exists
-        return self._find_parent_node_recursive(item, node.left, node)  # Hint: Remember to update the parent parameter
-    # Check if the given item is greater than the node's data
-    elif item > node.data:
-        # Recursively descend to the node's right child, if it exists
-        return self._find_parent_node_recursive(item, node.right, node)  # Hint: Remember to update the parent parameter
+    def _find_parent_node_recursive(self, item, node, parent=None):
+        """Return the parent node of the node containing the given item
+        (or the parent node of where the given item would be if inserted)
+        in this tree, or None if this tree is empty or has only a root node.
+        Search is performed recursively starting from the given node
+        (give the root node to start recursion)."""
+        # Best and worst case running time: O(log n)
+        # Check if starting node exists
+        if node is None:
+            # Not found (base case)
+            return parent
+        # Check if the given item matches the node's data
+        if item == node.data:
+        # Return the parent of the found node
+            return parent
+        # Check if the given item is less than the node's data
+        elif item < node.data:
+        # Recursively descend to the node's left child, if it exists
+            return self._find_parent_node_recursive(item, node.left, node)  # Hint: Remember to update the parent parameter
+        # Check if the given item is greater than the node's data
+        elif item > node.data:
+            # Recursively descend to the node's right child, if it exists
+            return self._find_parent_node_recursive(item, node.right, node)  # Hint: Remember to update the parent parameter
                                                                     
     def delete(self, item):
         """Remove given item from this tree, if present, or raise ValueError."""
@@ -279,13 +276,15 @@ def _find_parent_node_recursive(self, item, node, parent=None):
         """Traverse this binary tree with recursive pre-order traversal (DFS).
         Start at the given node and visit each node with the given function."""
         # Best and worst case running time: O(n)
-        if node is not None:
         # Visit this node's data with given function
-            visit(node.data)
         # Traverse left subtree, if it exists
+        visit(node.data)
+        if node.left is not None:
             self._traverse_pre_order_recursive(node.left, visit)
         # Traverse right subtree, if it exists
+        if node.right is not None:
             self._traverse_pre_order_recursive(node.right, visit)
+        
 
 
     def _traverse_pre_order_iterative(self, node, visit):
@@ -308,13 +307,14 @@ def _find_parent_node_recursive(self, item, node, parent=None):
         """Traverse this binary tree with recursive post-order traversal (DFS).
         Start at the given node and visit each node with the given function."""
         # Best and worst case running time: O(n)
-        if node is not None:
+        if node.left is not None:
         # Traverse left subtree, if it exists
             self._traverse_post_order_recursive(node.left, visit)
+        if node.right is not None:
         # Traverse right subtree, if it exists
             self._traverse_post_order_recursive(node.right, visit)
         # Visit this node's data with given function
-            visit(node.data)
+        visit(node.data)
 
     def _traverse_post_order_iterative(self, node, visit):
         """Traverse this binary tree with iterative post-order traversal (DFS).
@@ -339,11 +339,10 @@ def _find_parent_node_recursive(self, item, node, parent=None):
         #Running time: O(n), function visits all nodes
         #Memory usage: O(n^2)
         # Create queue to store nodes not yet traversed in level-order
-        queue = LinkedQueue()
-        # Enqueue given starting node
+        queue = Queue()
         queue.enqueue(start_node)
         # Loop until queue is empty
-        while not queue.is_empty():
+        while queue.length() > 0:
             # Dequeue node at front of queue
             node = queue.dequeue()
             # Visit this node's data with given function
