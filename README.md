@@ -1,5 +1,16 @@
-# CS1_3
+## CS1_3 Make School Term 4 2019/20
+# Core Data Structures - teacher: Jess Dahmen
 
-#So far, the DECODE and ENCODE functions are fully passing every test. 
-Slowly but surely.
+### in this class we learned about the following Python data structures:
 
+## bases.py	
+## binarytree.py	
+## hashtable.py
+## linkedlist.py	
+## palindromes.py	
+## queue.py	
+## recursion.py	
+## search.py	
+## sorting.py	
+## stack.py	
+## strings.py	
